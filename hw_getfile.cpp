@@ -9,7 +9,10 @@ using namespace std;
 //~~~~~~~~~~~~~~~~~~~~prints line from target word on.
 int main(int argc, char* argv[]){
   
-  //for (int i = 0; i<argc; i++)
+  if (argc < 2) {
+    cerr << "ERROR: missing first argument" << endl;
+    exit(1);
+  }
   string word = string(argv[1]);
   
 
@@ -18,14 +21,14 @@ int main(int argc, char* argv[]){
   ifstream infile (fileName.c_str());
 
   if (infile.good() == false){
-    cout << "unable to open the file name." << fileName;
+    cerr << "ERROR: unable to open the file name " << fileName << endl;
     exit(1);
   }
 
   while(true) {
     getline(infile, line);
     size_t pos = line.find(word);
-    if (pos == 2){
+    if (pos != -1){
       string word = line.substr(pos);
       cout << word  << endl;
     }
